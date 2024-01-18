@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+}
+.result {
+  font-weight: bold;
+  font-size: 2rem;
+  resize: none;
+  text-align: center;
+  height: 4rem;
+  line-height: 4rem;
+  margin-bottom: 1rem;
+}
+.main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.buttons {
+  margin: 1rem;
+}
+.buttons img {
+  padding: 1rem;
+}
+.image {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.image-button {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.2s;
+}
+.image-button:active {
+  transform: scale(0.9);
+}
+.display-result {
+  height: 15rem;
+  width: 50rem;
+  display: flex;
+}
+.move {
+  height: 13rem;
+  width: 25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1px;
+  border: 1px solid black;
+}
+.player-rock,
+.player-paper,
+.player-scissors {
+  display: none;
+}
+.computer-rock,
+.computer-scissors,
+.computer-paper {
+  display: none;
+}
+.visible {
+  display: block;
+}
+.won{
+  background-color: green;
+}
+.lose{
+  background-color: red;
+}
+.draw{
+  background-color: yellow;
+}
