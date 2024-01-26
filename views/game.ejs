@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock-Paper-Scissors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="grid relative h-screen p-2 main-container">
+        <div class="lives">
+            <div class="life" id="life1"></div>
+            <div class="life" id="life2"></div>
+            <div class="life" id="life3"></div>
+        </div>
+        <textarea name="banner" class="text-area border border-solid border-black relative top-16 left-1/2 transform -translate-x-1/2" disabled cols="70" rows="3">Start the Game</textarea>
+        <div class="grid relative m-2 grid-cols-2 top-12">
+            <div class="flex relative items-center justify-center border border-black w-96 ml-auto h-60">
+                <h4 class="absolute left-1 top-0">Player:</h4>
+                <img class="image rock-player" id="rock" src="assets/rock.png" alt="no image">
+                <img class="image paper-player" id="paper" src="assets/paper.png" alt="no image">
+                <img class="image scissor-player" id="scissor" src="assets/scissors.png" alt="no image">
+            </div>
+            <div class="flex relative items-center justify-center border border-black w-96 ml-2 h-60">
+                <h4 class="absolute left-1 top-0">Computer:</h4>
+                <img class="image rock-computer" id="rock" src="assets/rock.png" alt="no image">
+                <img class="image paper-computer" id="paper" src="assets/paper.png" alt="no image">
+                <img class="image scissor-computer" id="scissor" src="assets/scissors.png" alt="no image">
+            </div>
+        </div>
+        <div class="flex items-center justify-center">
+            <img class="image-button m-2" id="rock-button" src="assets/rock.png" alt="no image">
+            <img class="image-button m-2" id="paper-button" src="assets/paper.png" alt="no image">
+            <img class="image-button m-2" id="scissor-button" src="assets/scissors.png" alt="no image">
+        </div>
+    </div>
+  </body>
+  <script src="app.js"></script>
+</html>
