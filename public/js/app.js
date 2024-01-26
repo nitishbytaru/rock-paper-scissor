@@ -1,5 +1,7 @@
 //life counter
 let counter = 4;
+let gameOver = false;
+let score = 0;
 
 //Computer's move generator
 const computerMoveArr = ["rock-computer", "paper-computer", "scissor-computer"];
@@ -8,10 +10,11 @@ const computerMoveArr = ["rock-computer", "paper-computer", "scissor-computer"];
 const ELEMENTS = {
   resultBoard: document.querySelector(".text-area"),
   mainBody: document.querySelector(".main-container"),
+  life1: document.getElementById("life1"),
+  life2: document.getElementById("life2"),
+  life3: document.getElementById("life3"),
+  liveScore: document.getElementById("liveScore"),
 };
-let life1 = document.getElementById("life1");
-let life2 = document.getElementById("life2");
-let life3 = document.getElementById("life3");
 
 //User Interactive Buttons
 const BUTTON = {
@@ -57,12 +60,14 @@ BUTTON.scissor.addEventListener("click", () => {
 
 //functions
 function buttonClicked(arr, playerChoice) {
-  let duplicateArr = [...arr];
-  let indexTObeRemoved = duplicateArr.indexOf(playerChoice);
-  duplicateArr.splice(indexTObeRemoved, 1);
-  invisible(duplicateArr);
-  visible(playerChoice);
-  computerMove(playerChoice);
+  if (gameOver === false) {
+    let duplicateArr = [...arr];
+    let indexTObeRemoved = duplicateArr.indexOf(playerChoice);
+    duplicateArr.splice(indexTObeRemoved, 1);
+    invisible(duplicateArr);
+    visible(playerChoice);
+    computerMove(playerChoice);
+  }
 }
 
 //Utility function to make element visible
@@ -114,6 +119,8 @@ function gameResult(playerChoice, computerChoice) {
 
 //Function for player winning
 function playerWon(mainBody) {
+  score++;
+  ELEMENTS.liveScore.innerText = `${score}`;
   ELEMENTS.resultBoard.innerText = "Player Won";
   ELEMENTS.mainBody.classList.add("won");
   setTimeout((event) => {
@@ -126,12 +133,13 @@ function computerWon(mainBody) {
   counter--;
   ELEMENTS.resultBoard.innerText = "Computer Won";
   if (counter == 3) {
-    grey(life1);
+    grey(ELEMENTS.life1);
   } else if (counter == 2) {
-    grey(life2);
+    grey(ELEMENTS.life2);
   } else if (counter == 1) {
-    grey(life3);
+    grey(ELEMENTS.life3);
     ELEMENTS.resultBoard.innerText = "Game over Restart again !!!";
+    gameOver = true;
   }
   ELEMENTS.mainBody.classList.add("lose");
   setTimeout((event) => {
@@ -156,9 +164,9 @@ function grey(event) {
 //GAME RESTART
 function gameRestart() {
   ELEMENTS.resultBoard.innerText = "Start your game";
-  life1.classList.remove("grey");
-  life2.classList.remove("grey");
-  life3.classList.remove("grey");
+  ELEMENTS.life1.classList.remove("grey");
+  ELEMENTS.life2.classList.remove("grey");
+  ELEMENTS.life3.classList.remove("grey");
   counter = 4;
   invisible(
     ICONS.COMPUTER.rock,
