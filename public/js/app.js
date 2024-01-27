@@ -9,11 +9,12 @@ const computerMoveArr = ["rock-computer", "paper-computer", "scissor-computer"];
 //HTML Element Variables
 const ELEMENTS = {
   resultBoard: document.querySelector(".text-area"),
-  mainBody: document.querySelector(".main-container"),
+  mainBody: document.querySelector(".container"),
   life1: document.getElementById("life1"),
   life2: document.getElementById("life2"),
   life3: document.getElementById("life3"),
   liveScore: document.getElementById("liveScore"),
+  gameOverBanner: document.getElementById("gameOverBanner"),
 };
 
 //User Interactive Buttons
@@ -21,6 +22,7 @@ const BUTTON = {
   rock: document.getElementById("rock-button"),
   paper: document.getElementById("paper-button"),
   scissor: document.getElementById("scissor-button"),
+  restartButton: document.getElementById("restartButton"),
 };
 
 //User Icons & computer icons
@@ -57,8 +59,24 @@ BUTTON.paper.addEventListener("click", () => {
 BUTTON.scissor.addEventListener("click", () => {
   buttonClicked(iconsArr, ICONS.PLAYER.scissor);
 });
+BUTTON.restartButton.addEventListener("click", () => {
+  restartGame(iconsArr);
+});
 
 //functions
+function restartGame(arr) {
+  let duplicateArr = [...arr];
+  counter = 4;
+  gameOver = false;
+  score = 0;
+  ELEMENTS.mainBody.style.pointerEvents = "auto";
+  ELEMENTS.gameOverBanner.style.visibility = "hidden";
+  removeGrey(ELEMENTS.life1, ELEMENTS.life2, ELEMENTS.life3);
+  ELEMENTS.resultBoard.innerText = "Start your Game";
+  ELEMENTS.liveScore.innerText = `${score}`;
+  invisible(duplicateArr);
+}
+
 function buttonClicked(arr, playerChoice) {
   if (gameOver === false) {
     let duplicateArr = [...arr];
@@ -140,6 +158,9 @@ function computerWon(mainBody) {
     grey(ELEMENTS.life3);
     ELEMENTS.resultBoard.innerText = "Game over Restart again !!!";
     gameOver = true;
+    ELEMENTS.mainBody.style.pointerEvents = "none";
+    ELEMENTS.gameOverBanner.style.transform = "scale(2)";
+    ELEMENTS.gameOverBanner.style.visibility = "visible";
   }
   ELEMENTS.mainBody.classList.add("lose");
   setTimeout((event) => {
@@ -159,6 +180,12 @@ function draw(mainBody) {
 //function for losing chances
 function grey(event) {
   event.classList.add("grey");
+}
+
+function removeGrey(...elements) {
+  elements.forEach((element) => {
+    element.classList.remove("grey");
+  });
 }
 
 //GAME RESTART
