@@ -97,27 +97,25 @@ app.get("/game", (req, res) => {
 
 app.post("/game", async (req, res) => {
   try {
-    let { finalHighscore } = req.body;
-    let presentUserDetails = await userdetail.find({
-      username: `${req.session.user[0].username}`,
-    });
-    let { updated } = await userdetail.updateOne(
-      { username: `${req.session.user[0].username}` },
-      { $cond: { if: { highscore: 0 }, then: finalHighscore, else: 0 } }
+    let finalHighscore = req.body.highscore;
+    let updated = await userdetail.updateOne(
+      {
+        username: `${req.session.user[0].username}`,
+        highscore: { $lt: finalHighscore },
+      },
+      { $set: { highscore: finalHighscore } }
     );
-    console.log("11" + updated);
-    console.log("22" + presentUserDetails);
   } catch (error) {
     console.log(error);
   }
 });
 
 app.get("/home/register", (req, res) => {
-  res.render("register.ejs", { msg: 0 });
+  res.render("register.ejs");
 });
 
 app.get("/home/login", (req, res) => {
-  res.render("login.ejs", { msg: 0 });
+  res.render("login.ejs");
 });
 
 app.listen(8080, () => {
