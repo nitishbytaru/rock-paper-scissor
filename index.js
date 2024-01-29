@@ -64,9 +64,10 @@ app.get("/home", (req, res) => {
 app.get("/game", (req, res) => {
   res.render("game.ejs");
 });
-// app.post("/game", (req, res) => {
-//   // console.log(res.body);
-// });
+app.post("/game", (req, res) => {
+  let { highscore } = req.body;
+  console.log(highscore);
+});
 
 app.listen(8080, () => {
   console.log("server is listening");

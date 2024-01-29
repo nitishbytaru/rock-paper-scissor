@@ -158,7 +158,6 @@ function computerWon(mainBody) {
     grey(ELEMENTS.life3);
     ELEMENTS.resultBoard.innerText = "Game over Restart again !!!";
     gameOver = true;
-    console.log(score);
     sendToServer(score);
     ELEMENTS.mainBody.style.pointerEvents = "none";
     ELEMENTS.gameOverBanner.style.transform = "scale(2)";
@@ -171,18 +170,20 @@ function computerWon(mainBody) {
 }
 
 //Function if no-one win's
-function sendToServer(score) {
-  // Make an AJAX request to the server
-  fetch("/game", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(score),
-  });
-  // .then((response) => response.json())
-  // .then((data) => console.log(data))
-  // .catch((error) => console.error("Error:", error));
+async function sendToServer(highscore) {
+  try {
+    const response = await fetch("/game", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({highscore}),
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
 
 function draw(mainBody) {
