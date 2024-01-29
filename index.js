@@ -38,35 +38,44 @@ const userSchema = new mongoose.Schema({
 
 const userdetail = mongoose.model("userdetail", userSchema);
 
-// let userdetail1 = new userdetail({
-//   username: "killer99",
-//   password: "killer99",
-// });
-
-// userdetail1
-//   .save()
-//   .then((res) => {
-//     console.log(res);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
 app.get("/check", async (req, res) => {
   let gameUser = await userdetail.find();
   console.log(gameUser);
   res.send("hurry");
 });
 
+//node.js application
 app.get("/home", (req, res) => {
   res.render("home.ejs");
 });
+
+app.post("/home", (req, res) => {
+  let userdetail1 = new userdetail({
+    username: `${req.body.username}`,
+    password: `${req.body.password}`,
+  });
+  userdetail1
+    .save()
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  res.render("home.ejs");
+});
+
 app.get("/game", (req, res) => {
   res.render("game.ejs");
 });
+
 app.post("/game", (req, res) => {
   let { highscore } = req.body;
   console.log(highscore);
+});
+
+app.get("/home/register", (req, res) => {
+  res.render("register.ejs");
 });
 
 app.listen(8080, () => {
