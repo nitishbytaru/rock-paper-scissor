@@ -65,3 +65,7 @@
   transition: transform 0.2s;
   visibility: hidden;
 }
+th,td{
+  border: solid 1px black;
+  text-align: center;
+}

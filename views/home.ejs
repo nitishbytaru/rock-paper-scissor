@@ -9,16 +9,22 @@
 </head>
 <body>
     <form class=" main-container">
+        <form action="/home" method="post">
+            <div class="fixed w-auto top-8 left-8 z-10">
+              <button type="submit" class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-lg m-2 px-5 py-2.5 ">Home</button>
+            </div>
+        </form>
+    <form method="post">
         <div class="fixed z-0">
             <img src="assets/rock-paper.jpg" class="h-screen w-screen " alt="no image">
         </div>
         <div class="absolute right-16 top-8" >
-            <button type="submit" formaction="/home/register" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-lg m-2 px-5 py-2.5 ">Register</button>
+            <button type="submit" formaction="/home/register" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-lg m-2 px-5 py-2.5 "">Register</button>
             <button type="submit" formaction="/home/login" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-lg  px-5 py-2.5 ">Login</button>
         </div>
         <div class="absolute w-screen text-center top-80 z-10">
             <button type="submit" formaction="/game" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-lg m-2 px-5 py-2.5 ">Play Game</button>
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-lg m-2 px-5 py-2.5 ">High Scores</button>
+            <button type="submit" formaction="/home/highscore" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-lg m-2 px-5 py-2.5 ">High Scores</button>
         </div>
     </form>
 </body>

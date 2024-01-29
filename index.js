@@ -118,6 +118,17 @@ app.get("/home/login", (req, res) => {
   res.render("login.ejs");
 });
 
+app.get("/home/highscore", async (req, res) => {
+  const sortedArray = (await userdetail.find()).sort(
+    (a, b) => b.highscore - a.highscore
+  );
+  res.render("highscore.ejs", { sortedArray, count: 1 });
+});
+
+app.post("/home", (req, res) => {
+  res.redirect("/home");
+});
+
 app.listen(8080, () => {
   console.log("server is listening");
 });
