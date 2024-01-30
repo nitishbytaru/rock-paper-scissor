@@ -1,43 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock-Paper-Scissors-Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-  <form action="/home" method="post">
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
     <div class="fixed w-auto top-8 left-8 z-10">
-      <button type="submit" class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-lg m-2 px-5 py-2.5 ">Home</button>
+      <a
+        href="/home"
+        class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-lg m-2 px-5 py-2.5"
+        >Home</a
+      >
     </div>
-  </form>
     <div class="fixed z-0">
-        <img src="/assets/rock-paper.jpg" class="h-screen w-screen " alt="no-image">
+      <img
+        src="/assets/rock-paper.jpg"
+        class="h-screen w-screen"
+        alt="no-image"
+      />
     </div>
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div class="w-full max-w-xs ">
-            <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-              <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                  Username
-                </label>
-                <input required name="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username">
-              </div>
-              <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                  Password
-                </label>
-                <input required name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************">
-              </div>
-              <div class="text-center">
-                <button formaction="/home/login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                  Login
-                </button>
-              </div>
-            </form>
+    <div
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+    >
+      <div class="w-full max-w-xs">
+        <form
+          method="post"
+          class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="username"
+            >
+              Username
+            </label>
+            <input
+              required
+              name="username"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username"
+              type="text"
+              placeholder="Username"
+            />
           </div>
+          <div class="mb-6">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="password"
+            >
+              Password
+            </label>
+            <input
+              required
+              name="password"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="password"
+              type="password"
+              placeholder="******************"
+            />
+          </div>
+          <div class="text-center">
+            <button
+              formaction="/home/login"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-</body>
+  </body>
 </html>

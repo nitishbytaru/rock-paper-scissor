@@ -74,6 +74,10 @@ app.post("/home/register", async (req, res) => {
   }
 });
 
+app.get("/home/login", (req, res) => {
+  res.render("login.ejs");
+});
+
 app.post("/home/login", async (req, res) => {
   let gameLoginUser = await userdetail.find({
     username: `${req.body.username}`,
@@ -112,10 +116,6 @@ app.post("/game", async (req, res) => {
 
 app.get("/home/register", (req, res) => {
   res.render("register.ejs");
-});
-
-app.get("/home/login", (req, res) => {
-  res.render("login.ejs");
 });
 
 app.get("/home/highscore", async (req, res) => {
