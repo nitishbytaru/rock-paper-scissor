@@ -1,4 +1,4 @@
-<%- include("includes/head.ejs"); %>
+<%- include("includes/head.ejs", { currUser: currUser }) %>
     <form class=" main-container">
         <div class="fixed z-0">
             <img src="/assets/rock-paper.jpg" class="h-screen w-screen " alt="no image">
@@ -11,7 +11,7 @@
                     <th>Score</th>
                 </tr>
                 <% for (let user of sortedArray) { %>
-                    <tr>
+                    <tr class="text-center">
                         <td><%= count++ %></td>
                         <td><%= user.username %></td>
                         <td><%= user.highscore %></td>

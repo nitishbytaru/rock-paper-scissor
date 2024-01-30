@@ -5,7 +5,7 @@ const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-const flash = require("connect-flash");
+// const flash = require("connect-flash");
 
 app.use(express.static(path.join(__dirname, "public/css")));
 app.use(express.static(path.join(__dirname, "public/js")));
@@ -47,12 +47,13 @@ const userSchema = new mongoose.Schema({
 
 const userdetail = mongoose.model("userdetail", userSchema);
 
-app.use(flash());
+// app.use(flash());
 
 //node.js application
 app.get("/home", (req, res) => {
-  res.render("home.ejs");
+  res.render("home.ejs", { currUser: req.session.user });
 });
+
 
 app.post("/home/register", async (req, res) => {
   let userdetail1 = new userdetail({
@@ -78,7 +79,16 @@ app.post("/home/register", async (req, res) => {
 });
 
 app.get("/home/login", (req, res) => {
-  res.render("login.ejs");
+  res.render("login.ejs", { currUser: req.session.user });
+});
+
+//middleware to check if the user is logged in or not
+app.use("/game", async (req, res, next) => {
+  if (!req.session.user) {
+    res.redirect("/home/login");
+  } else {
+    next();
+  }
 });
 
 app.post("/home/login", async (req, res) => {
@@ -99,7 +109,7 @@ app.post("/home/login", async (req, res) => {
 });
 
 app.get("/game", (req, res) => {
-  res.render("game.ejs");
+  res.render("game.ejs", { currUser: req.session.user });
 });
 
 app.post("/game", async (req, res) => {
@@ -118,14 +128,19 @@ app.post("/game", async (req, res) => {
 });
 
 app.get("/home/register", (req, res) => {
-  res.render("register.ejs");
+  res.render("register.ejs", { currUser: req.session.user });
 });
 
 app.get("/home/highscore", async (req, res) => {
   const sortedArray = (await userdetail.find()).sort(
     (a, b) => b.highscore - a.highscore
   );
-  res.render("highscore.ejs", { sortedArray, count: 1 });
+  res.render("highscore.ejs", { sortedArray, count: 1,  currUser: req.session.user  });
+});
+
+app.get("/home/logout", (req, res) => {
+  delete req.session.user;
+  res.redirect("/home")
 });
 
 app.post("/home", (req, res) => {
