@@ -5,6 +5,7 @@ const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 app.use(express.static(path.join(__dirname, "public/css")));
 app.use(express.static(path.join(__dirname, "public/js")));
@@ -45,6 +46,8 @@ const userSchema = new mongoose.Schema({
 });
 
 const userdetail = mongoose.model("userdetail", userSchema);
+
+app.use(flash());
 
 //node.js application
 app.get("/home", (req, res) => {
