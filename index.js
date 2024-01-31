@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -5,6 +7,7 @@ const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 
 app.use(express.static(path.join(__dirname, "public/css")));
@@ -13,13 +16,29 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // Parse JSON requests
 app.use(methodOverride("_method"));
-app.use(
-  session({
-    secret: "mysecretcode", // Change this to a strong, random string
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+
+const dbUrl = process.env.ATLASDB_URL;
+
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error",()=>{
+  console.log("ERROR in MONGO SESSIONS",err);
+})
+
+const sessionOptions = {
+  store,
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+};
+
+app.use(session(sessionOptions));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
@@ -27,7 +46,10 @@ main().catch((err) => console.log(err));
 
 async function main() {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/rockpaperscissor");
+    await mongoose.connect(dbUrl, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("Connected to the database");
   } catch (error) {
     console.error("Error connecting to the database:", error);
@@ -62,7 +84,6 @@ app.get("/home", (req, res) => {
 
 app.post("/home/register", async (req, res, next) => {
   try {
-    
     let userdetail1 = new userdetail({
       username: `${req.body.username}`,
       password: `${req.body.password}`,
@@ -78,10 +99,12 @@ app.post("/home/register", async (req, res, next) => {
         .catch((err) => {
           console.log(err);
         });
-      req.flash("success", "Registeration successfull Login and play the game !!");
+      req.flash(
+        "success",
+        "Registeration successfull Login and play the game !!"
+      );
       res.redirect("/home");
     }
-
   } catch (error) {
     console.error("Error in /home/register route:", error);
     next(error); // Pass the error to the error handling middleware
@@ -89,14 +112,20 @@ app.post("/home/register", async (req, res, next) => {
 });
 
 app.get("/home/login", (req, res) => {
-  res.render("login.ejs", { currUser: req.session.user , messages: req.flash() });
+  res.render("login.ejs", {
+    currUser: req.session.user,
+    messages: req.flash(),
+  });
 });
 
 //middleware to check if the user is logged in or not
 app.use("/game", async (req, res, next) => {
   if (!req.session.user) {
     req.flash("error", "Login to play the game");
-    res.render("login.ejs", { currUser: req.session.user, messages: req.flash() });
+    res.render("login.ejs", {
+      currUser: req.session.user,
+      messages: req.flash(),
+    });
   } else {
     next();
   }
