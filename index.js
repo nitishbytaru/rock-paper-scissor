@@ -36,7 +36,6 @@ const sessionOptions = {
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection }), // Pass the mongoose connection
 };
 
 app.use(session(sessionOptions));
@@ -50,8 +49,6 @@ async function main() {
     await mongoose.connect(dbUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true, // Add this line
-      useFindAndModify: false // Add this line
     });
     console.log("Connected to the database");
   } catch (error) {
