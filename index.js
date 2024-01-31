@@ -89,7 +89,7 @@ app.post("/home/register", async (req, res, next) => {
 });
 
 app.get("/home/login", (req, res) => {
-  res.render("login.ejs", { currUser: req.session.user });
+  res.render("login.ejs", { currUser: req.session.user , messages: req.flash() });
 });
 
 //middleware to check if the user is logged in or not
