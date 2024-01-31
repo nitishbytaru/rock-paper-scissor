@@ -7,7 +7,7 @@ const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
 
 app.use(express.static(path.join(__dirname, "public/css")));
@@ -36,6 +36,7 @@ const sessionOptions = {
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }), // Pass the mongoose connection
 };
 
 app.use(session(sessionOptions));
@@ -49,6 +50,8 @@ async function main() {
     await mongoose.connect(dbUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true, // Add this line
+      useFindAndModify: false // Add this line
     });
     console.log("Connected to the database");
   } catch (error) {
