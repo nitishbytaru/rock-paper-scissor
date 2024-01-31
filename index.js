@@ -7,7 +7,7 @@ const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 
 app.use(express.static(path.join(__dirname, "public/css")));
@@ -27,12 +27,12 @@ const store = MongoStore.create({
   touchAfter: 24 * 3600,
 });
 
-store.on("error",()=>{
-  console.log("ERROR in MONGO SESSIONS",err);
-})
+store.on("error", (err) => {
+  console.log("ERROR in MONGO SESSIONS", err);
+});
 
 const sessionOptions = {
-  store,
+  store:store,
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
