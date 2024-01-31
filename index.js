@@ -78,7 +78,7 @@ const userdetail = mongoose.model("userdetail", userSchema);
 app.use(flash());
 
 //node.js application
-app.get("/home", (req, res) => {
+app.get("/", (req, res) => {
   res.render("home.ejs", { currUser: req.session.user, messages: req.flash() });
 });
 
@@ -91,7 +91,7 @@ app.post("/home/register", async (req, res, next) => {
     let gameUser = await userdetail.find({ username: `${req.body.username}` });
     if (gameUser.length) {
       req.flash("error", "User Exists");
-      res.redirect("/home");
+      res.redirect("/");
     } else {
       userdetail1
         .save()
@@ -103,7 +103,7 @@ app.post("/home/register", async (req, res, next) => {
         "success",
         "Registeration successfull Login and play the game !!"
       );
-      res.redirect("/home");
+      res.redirect("/");
     }
   } catch (error) {
     console.error("Error in /home/register route:", error);
@@ -138,13 +138,13 @@ app.post("/home/login", async (req, res) => {
   if (gameLoginUser.length && gameLoginUser[0].password === req.body.password) {
     req.session.user = gameLoginUser;
     req.flash("success", "login successfull");
-    res.redirect("/home");
+    res.redirect("/");
   } else {
     req.flash(
       "error",
       "login Failed Try again! \n If New user Register first!!!"
     );
-    res.redirect("/home");
+    res.redirect("/");
   }
 });
 
@@ -185,11 +185,11 @@ app.get("/home/highscore", async (req, res) => {
 
 app.get("/home/logout", (req, res) => {
   delete req.session.user;
-  res.redirect("/home");
+  res.redirect("/");
 });
 
-app.post("/home", (req, res) => {
-  res.redirect("/home");
+app.post("/", (req, res) => {
+  res.redirect("/");
 });
 
 app.use((err, req, res, next) => {
