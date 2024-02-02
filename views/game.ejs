@@ -8,49 +8,59 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <div class="main-container">
-        <div class="fixed w-auto top-8 left-8 z-10">
-          <a href="/" class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-lg m-2 px-5 py-2.5 ">Home</a>
-        </div>
-      <div class="grid relative h-screen p-2 container ">
-        <div class="lives">
-            <div class="life" id="life1"></div>
-            <div class="life" id="life2"></div>
-            <div class="life" id="life3"></div>
-        </div>
-        <label class="fixed right-32 top-12 font-bold">
-          Your Score:
-          <div class="h-12 w-32 border border-black border-solid flex items-center justify-center">
-            <h1 id="liveScore">0</h1>
+    <div class="main-container h-screen">
+      <div class="fixed overflow-hidden flex items-center justify-center h-screen">
+        <img src="assets/finalbg.jpg" alt="no image" class="hidden sm:block h-screen w-screen object-cover">
+        <img src="assets/potraitbg.jpeg" alt="no image" class="block w-screen h-screen object-cover sm:hidden ">
+      </div>      
+      <div>
+        <div class="grid relative container sm:w-screen h-screen">
+            <div class="flex items-center justify-between w-screen">
+              <div class="flex items-center justify-center">
+                <a href="/" class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-lg mr-2 px-5 py-2.5 ">Home</a>
+                <div class="lives">
+                  <div class="life" id="life1"></div>
+                  <div class="life" id="life2"></div>
+                  <div class="life" id="life3"></div>
+                </div>
+              </div>
+              <div class="sm:mr-8">
+                <label class="font-bold">
+                  Your Score:
+                  <div class="h-8 sm:h-12 sm:w-32 border border-black border-solid flex items-center justify-center">
+                    <h1 id="liveScore">0</h1>
+                  </div>
+                </label>
+              </div>
+            </div>
+          <textarea name="banner" class="text-area border border-solid border-black relative w-60 left-1/2 transform -translate-x-1/2 sm:w-1/2 left-1/2 transform -translate-x-1/2" disabled >Start the Game</textarea>
+          <div class=" w-screen flex items-center justify-center">
+              <div class="flex relative items-center justify-center border border-black ml-2 mr-2 w-96 h-60">
+                  <h4 class="absolute left-1 top-0">Player:</h4>
+                  <img class="image rock-player w-20 h-20 sm:w-40 sm:h-40" id="rock" src="/assets/rock.png" alt="no image">
+                  <img class="image paper-player w-20 h-20 sm:w-40 sm:h-40" id="paper" src="/assets/paper.png" alt="no image">
+                  <img class="image scissor-player w-20 h-20 sm:w-40 sm:h-40" id="scissor" src="/assets/scissors.png" alt="no image">
+              </div>
+              <div class="flex relative items-center justify-center border border-black mr-2 ml-4 w-96 h-60">
+                  <h4 class="absolute left-1 top-0">Computer:</h4>
+                  <img class="image rock-computer w-20 h-20 sm:w-40 sm:h-40" id="rock" src="/assets/rock.png" alt="no image">
+                  <img class="image paper-computer w-20 h-20 sm:w-40 sm:h-40" id="paper" src="/assets/paper.png" alt="no image">
+                  <img class="image scissor-computer w-20 h-20 sm:w-40 sm:h-40" id="scissor" src="/assets/scissors.png" alt="no image">
+              </div>
           </div>
-        </label>
-        <textarea name="banner" class="text-area border border-solid border-black relative top-16 left-1/2 transform -translate-x-1/2" disabled cols="70" rows="3">Start the Game</textarea>
-        <div class="grid relative m-2 grid-cols-2 top-12">
-            <div class="flex relative items-center justify-center border border-black w-96 ml-auto h-60">
-                <h4 class="absolute left-1 top-0">Player:</h4>
-                <img class="image rock-player" id="rock" src="/assets/rock.png" alt="no image">
-                <img class="image paper-player" id="paper" src="/assets/paper.png" alt="no image">
-                <img class="image scissor-player" id="scissor" src="/assets/scissors.png" alt="no image">
-            </div>
-            <div class="flex relative items-center justify-center border border-black w-96 ml-2 h-60">
-                <h4 class="absolute left-1 top-0">Computer:</h4>
-                <img class="image rock-computer" id="rock" src="/assets/rock.png" alt="no image">
-                <img class="image paper-computer" id="paper" src="/assets/paper.png" alt="no image">
-                <img class="image scissor-computer" id="scissor" src="/assets/scissors.png" alt="no image">
-            </div>
-        </div>
-        <div class="flex items-center justify-center">
-            <img class="image-button m-2" id="rock-button" src="/assets/rock.png" alt="no image">
-            <img class="image-button m-2" id="paper-button" src="/assets/paper.png" alt="no image">
-            <img class="image-button m-2" id="scissor-button" src="/assets/scissors.png" alt="no image">
+          <div class="flex items-center justify-center">
+              <img class="image-button m-2 w-20 h-20 sm:w-40 sm:h-40" id="rock-button" src="/assets/rock.png" alt="no image">
+              <img class="image-button m-2 w-20 h-20 sm:w-40 sm:h-40" id="paper-button" src="/assets/paper.png" alt="no image">
+              <img class="image-button m-2 w-20 h-20 sm:w-40 sm:h-40" id="scissor-button" src="/assets/scissors.png" alt="no image">
+          </div>
         </div>
       </div>
-      <form class="fixed border border-black border-solid game-over w-1/3 top-1/4 left-1/3 flex items-center justify-center" id="gameOverBanner">
+      <form class=" fixed border border-black border-solid game-over w-1/3 top-1/4 left-1/3 flex items-center justify-center" id="gameOverBanner">
         <div>
           <img src="assets/gameover.jpg" alt="no image">
           <div class="flex items-center justify-center">
-            <a href="/game" class=" text-center w-full border border-white text-white bg-green-700 hover:bg-green-800 text-lg px-2.5 py-2" id="restartButton">Restart</a>
-            <a href="/" class=" text-center w-full border border-white text-white bg-green-700 hover:bg-green-800 text-lg px-2.5 py-2" id="restartButton">Home</a>
+            <a href="/game" class=" text-center w-40  sm:w-full border border-white text-white bg-green-700 hover:bg-green-800 text-lg px-2.5 py-2" id="restartButton">Restart</a>
+            <a href="/" class=" text-center w-40 sm:w-full border border-white text-white bg-green-700 hover:bg-green-800 text-lg px-2.5 py-2" id="restartButton">Home</a>
           </div>
         </div>
       </form>

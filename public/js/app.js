@@ -160,7 +160,7 @@ function computerWon(mainBody) {
     gameOver = true;
     sendToServer(score);
     ELEMENTS.mainBody.style.pointerEvents = "none";
-    ELEMENTS.gameOverBanner.style.transform = "scale(2)";
+    ELEMENTS.gameOverBanner.style.transform = "scale(1)";
     ELEMENTS.gameOverBanner.style.visibility = "visible";
   }
   ELEMENTS.mainBody.classList.add("lose");
@@ -177,7 +177,7 @@ async function sendToServer(highscore) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({highscore}),
+      body: JSON.stringify({ highscore }),
     });
     const data = await response.json();
     console.log(data);
@@ -188,6 +188,7 @@ async function sendToServer(highscore) {
 
 function draw(mainBody) {
   ELEMENTS.resultBoard.innerText = "Draw";
+  console.log(mainBody);
   ELEMENTS.mainBody.classList.add("draw");
   setTimeout((event) => {
     ELEMENTS.mainBody.classList.remove("draw");

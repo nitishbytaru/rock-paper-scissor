@@ -11,15 +11,11 @@
   overflow: hidden;
 }
 .image {
-  height: 10rem;
-  width: 10rem;
   border-radius: 50%;
   object-fit: cover;
   display: none;
 }
 .image-button {
-  height: 10rem;
-  width: 10rem;
   border-radius: 50%;
   object-fit: cover;
   transition: transform 0.2s;
@@ -29,9 +25,7 @@
 }
 .lives {
   height: 2rem;
-  width: 8rem;
   display: flex;
-  position: fixed;
   left: 10%;
   top: 5%;
 }

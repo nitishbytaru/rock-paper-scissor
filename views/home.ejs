@@ -1,10 +1,6 @@
 <%- include("includes/head.ejs", { currUser: currUser }) %>
 
-<div class="main-container">
-  <div class="fixed z-0">
-    <img src="assets/rock-paper.jpg" class="h-screen w-screen " alt="no image">
-  </div>
-
+<div class="main-containe">
   <% if (messages.success) { %>
     <div class="fixed top-24 left-1/2 transform -translate-x-1/2  w-1/2 z-10">
       <div id="alert-3" class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
@@ -41,7 +37,7 @@
   <% } %>
 
   <div class="fixed w-screen text-center top-80 z-10">
-    <a href="/game" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-lg m-2 px-5 py-2.5 ">Play Game</a>
+    <a href="/game" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-lg m-2 px-5 py-2.5">Play Game</a>
     <a href="/home/highscore" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-lg m-2 px-5 py-2.5 ">High Scores</a>
   </div>
 </div>
